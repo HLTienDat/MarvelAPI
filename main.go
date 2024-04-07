@@ -37,10 +37,7 @@ type Character struct {
 }
 
 func randomChar() rune {
-
-	// Generate a random ASCII value between 32 and 126 (inclusive)
 	randomValue := rand.Intn(26) + 97
-
 	return rune(randomValue)
 }
 func main() {

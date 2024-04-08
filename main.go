@@ -41,12 +41,12 @@ func randomChar() rune {
 	return rune(randomValue)
 }
 func main() {
-	ts := time.Now().Format("20060102150405")
+	ts := time.Now().Format("20240407130608")
 	hash := generateHash(ts)
 	limit := 10
 	offset := 0
 	randChar := string(randomChar())
-	fmt.Println("Find 10 random characters start with letter:", randChar)
+	fmt.Println("Find 10 random characters that have their name start with letter:", randChar)
 	url := fmt.Sprintf("%s%s?nameStartsWith=%s&apikey=%s&ts=%s&hash=%s&limit=%d&offset=%d", apiBaseURL, charactersURL, randChar, publicKey, ts, hash, limit, offset)
 
 	res, err := http.Get(url)
@@ -72,7 +72,11 @@ func main() {
 	for _, character := range characterData.Data.Results {
 		fmt.Println("=================")
 		fmt.Printf("Character: %s\n", character.Name)
-		fmt.Printf("Discription: %s\n", character.Description)
+		fmt.Printf("Discription: %s", character.Description)
+		if character.Description == "" {
+			fmt.Print("No information")
+		}
+		fmt.Println()
 		fmt.Println("Comics:")
 		if len(character.Comics.Items) == 0 {
 			fmt.Println("No comic Available")

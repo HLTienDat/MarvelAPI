@@ -43,12 +43,12 @@ func randomChar() rune {
 func main() {
 	ts := time.Now().Format("20240407130608")
 	hash := generateHash(ts)
-	limit := 10
+	limit := 1
 	offset := 0
 	randChar := string(randomChar())
 	fmt.Println("Find 10 random characters that have their name start with letter:", randChar)
 	url := fmt.Sprintf("%s%s?nameStartsWith=%s&apikey=%s&ts=%s&hash=%s&limit=%d&offset=%d", apiBaseURL, charactersURL, randChar, publicKey, ts, hash, limit, offset)
-
+	fmt.Println(url)
 	res, err := http.Get(url)
 	if err != nil {
 		fmt.Printf("Error making API request: %s\n", err.Error())
